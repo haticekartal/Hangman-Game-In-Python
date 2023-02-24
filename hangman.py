@@ -1,11 +1,13 @@
 import random
 import time
 
-print("\n--WELCOME TO HANGMAN GAME--- \n")
+print("\n---WELCOME TO HANGMAN GAME--- \n")
 name = input("Enter your name: ")
 print("Hello " + name + "  Good Luck!")
 time.sleep(1)
 print("Let's play Hangman!")
+time.sleep(1.5)
+print("\nHere is a hint for you, you'll be guessing a color!\n")
 time.sleep(2)
 
 def main():
@@ -40,8 +42,8 @@ def hangman():
     global word
     global already_guessed
     global play_game
-    limit = 5
-    guess = input("This is the Hangman Word(!!it's a color!!): " + display + " Enter your guess: \n")
+    limit = 7
+    guess = input("This is the Hangman Word: " + display + " Enter your guess: \n")
     guess = guess.strip()
     if len(guess.strip()) == 0 or len(guess.strip()) >= 2 or guess <= "9":
         print("Invalid Input, Try a letter\n")
@@ -116,11 +118,35 @@ def hangman():
                   "  |     |\n"
                   "  |     | \n"
                   "  |     O \n"
+                  "  |     | \n"
+                  "  |       \n"
+                  "__|__\n")
+            print("Wrong guess. " + str(limit - count) + " last guess remaining\n")
+            
+        elif count == 6:
+            time.sleep(1)
+            print("   _____ \n"
+                  "  |     | \n"
+                  "  |     |\n"
+                  "  |     | \n"
+                  "  |     O \n"
+                  "  |    /|\ \n"
+                  "  |        \n"
+                  "__|__\n")
+            print("Wrong guess. " + str(limit - count) + " last guess remaining\n")
+            
+        elif count == 7:
+            time.sleep(1)
+            print("   _____ \n"
+                  "  |     | \n"
+                  "  |     |\n"
+                  "  |     | \n"
+                  "  |     O \n"
                   "  |    /|\ \n"
                   "  |    / \ \n"
                   "__|__\n")
             print("Wrong guess. You are hanged!!!\n")
-            print("The word was:",already_guessed,word)
+            print("The word was:", guessed_letters, word)
             play_loop()
 
     if word == '_' * length:
@@ -129,7 +155,6 @@ def hangman():
 
     elif count != limit:
         hangman()
-
 
 main()
 hangman()
